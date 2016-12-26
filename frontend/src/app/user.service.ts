@@ -14,7 +14,8 @@ export class UserService {
   getUsers(): Promise<User[]> {
     return this.http.get(this.getAllUsersUrl)
       .toPromise()
-      .then(response => response.json().data as User[])
+      .then(response => response.json() as User[])
+      //.then(response => console.log(response.json()))
       .catch(this.handleError);
   }
 

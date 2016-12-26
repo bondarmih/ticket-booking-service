@@ -29,7 +29,7 @@ var UserService = (function () {
     UserService.prototype.getUsers = function () {
         return this.http.get(this.getAllUsersUrl)
             .toPromise()
-            .then(function (response) { return response.json().data; })
+            .then(function (response) { return response.json(); })
             .catch(this.handleError);
     };
     UserService.prototype.handleError = function (error) {

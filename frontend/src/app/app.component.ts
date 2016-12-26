@@ -12,8 +12,8 @@ import './rxjs-extensions';
 export class AppComponent implements OnInit{
 
   constructor(private userService: UserService) {}
-  users: User[];
-  selectedUser: User;
+  public users: User[];
+  private selectedUser: User;
 
   onSelect(user: User): void {
     this.selectedUser = user;

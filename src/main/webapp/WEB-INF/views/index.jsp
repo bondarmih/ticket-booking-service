@@ -20,6 +20,6 @@
 <app-root>Loading...</app-root>
 <script type="text/javascript" src="<spring:url value='/static/inline.bundle.js'/>"></script>
         <script type="text/javascript" src="<spring:url value='/static/vendor.bundle.js'/>"></script>
-        <script type="text/javascript" src="<spring:url value='/static/main.bundle.js'/>"></script>
+        <script async type="text/javascript" src="<spring:url value='/static/main.bundle.js'/>"></script>
                 </body>
 </html>
