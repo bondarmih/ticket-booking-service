@@ -1,0 +1,13 @@
+.details-row {
+    padding: auto 1em;
+    height: 3em;
+}
+
+.details-row:hover {
+    background-color: lightblue;
+    cursor: pointer;
+}
+
+h4 {
+    text-align: center;
+}

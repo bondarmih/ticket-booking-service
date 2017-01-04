@@ -44,8 +44,8 @@ public class PersistenceConfiguration {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
         sessionFactory.setPackagesToScan(
-                "com.bondarmih.ticketbooking.entity",
-                "com.bondarmih.ticketbooking.dao"
+                "com.bondarmih.ticketbooking.data.entity",
+                "com.bondarmih.ticketbooking.data.dao"
         );
         sessionFactory.setHibernateProperties(hibernateProperties());
 

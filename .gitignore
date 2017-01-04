@@ -1,8 +1,13 @@
-build/
-out/
-.idea/
-classes/
 .gradle/
+.idea/
+build/
+fe/built/
+fe/dist/
+fe/codegen/
+fe/aot/
+fe/node_modules/
+out/
+classes/
 *.iml
 lib/
 dist/

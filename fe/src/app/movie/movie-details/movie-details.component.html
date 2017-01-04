@@ -1,0 +1,12 @@
+<div *ngIf="movie">
+    <div class="movie-header">
+        <h2>{{movie.name}}</h2>
+        <div class="movie-duration">Продолжительность {{movie.duration}} мин.</div>
+    </div>
+
+    <h3>Описание</h3>
+    <p>{{movie.description}}</p>
+    <h3>Сеансы</h3>
+    <session-list [sessions]="movie.sessions"></session-list>
+
+</div>

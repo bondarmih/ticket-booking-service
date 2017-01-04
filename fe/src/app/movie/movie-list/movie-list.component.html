@@ -1,0 +1,10 @@
+<div id="movie-list">
+    <ul>
+        <li *ngFor="let movie of movies">
+            <div class="movie-block">
+            {{movie.name}}, {{movie.description}}, starting {{movie.starting | date: "dd MMMM yyyy"}}
+                <a [routerLink]="['/movies', movie.id]">View details</a>
+            </div>
+        </li>
+    </ul>
+</div>
