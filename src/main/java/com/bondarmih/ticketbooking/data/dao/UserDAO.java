@@ -15,14 +15,7 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class UserDAO implements IUserDAO {
-
-    @Autowired
-    SessionFactory sessionFactory;
-
-    protected Session getSession() {
-        return sessionFactory.getCurrentSession();
-    }
+public class UserDAO extends AbstractHibernateDAO implements IUserDAO {
 
     @Override
     @SuppressWarnings("unchecked")
@@ -40,6 +33,7 @@ public class UserDAO implements IUserDAO {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public User getUserByName(String name) {
         Session session = getSession();
         List<User> userList = (List<User>) session.createQuery("from User u where u.name = ?").setString(0, name).list();

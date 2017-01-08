@@ -2,9 +2,6 @@
  * Created by bondarm on 02.01.17.
  */
 import {Component, OnInit} from '@angular/core';
-import {Movie} from "../movie/movie";
-import {MovieService} from "../services/movie.service";
-
 
 
 @Component({

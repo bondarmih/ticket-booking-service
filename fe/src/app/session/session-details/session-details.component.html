@@ -1,11 +1,11 @@
 <div class="row">
     <div class="session-date col-md-2">
         <div *ngIf="withDate">
-            {{session.timeStart.toLocaleDateString("ru", {day: 'numeric', month: 'long'})}}
+            {{session.timeStart}}
         </div>
     </div>
     <div class="session-time col-md-2">
-        {{session.timeStart.toLocaleTimeString("ru", {hour: 'numeric', minute: 'numeric'})}}
+        {{session.timeStart}}
     </div>
     <div class="session-hall col-md-2">
         {{session.hall}}
@@ -17,6 +17,6 @@
         {{session.regSeatsAvailable}}/<span class="vip">{{session.vipSeatsAvailable}}</span>
     </div>
     <div class="session-order col-md-2">
-        Order
+        <a [routerLink]="['/order/withSession', session.id]">Order</a>
     </div>
 </div>

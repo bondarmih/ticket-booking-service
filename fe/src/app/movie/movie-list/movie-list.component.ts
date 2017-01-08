@@ -3,7 +3,7 @@
  */
 import {Component, OnInit} from '@angular/core';
 import {Movie} from "../movie";
-import {MovieService} from "../../services/movie.service";
+import {MovieService} from "../movie.service";
 
 
 
@@ -23,7 +23,7 @@ export class MovieListComponent implements OnInit{
 
     getMovies(): void {
         this.movieService.getMovies()
-            .then(movies => this.movies = movies);
+            .subscribe(movies => this.movies = movies);
     }
 
     ngOnInit() {

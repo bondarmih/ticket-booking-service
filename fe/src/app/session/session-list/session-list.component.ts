@@ -1,5 +1,6 @@
-import {Component, Input} from "@angular/core";
+import {Component, Input, OnInit} from "@angular/core";
 import {Session} from "../session";
+import {SessionService} from "../session.service";
 
 
 
@@ -10,13 +11,16 @@ import {Session} from "../session";
     styles: [ require('./session-list.component.css')]
 })
 
-export class SessionListComponent {
-    @Input()
-    sessions: Session[];
+export class SessionListComponent implements OnInit{
+    sessions: Session[] = [];
+    @Input() movieId: number;
     private today: Date;
     private tomorrow: Date;
     private afterTomorrow: Date;
-    constructor () {
+
+    constructor (
+        private sessionService: SessionService
+    ) {
         this.today = new Date;
         this.tomorrow = new Date();
         this.tomorrow.setHours(0,0,0,0);
@@ -24,5 +28,13 @@ export class SessionListComponent {
         this.afterTomorrow = new Date();
         this.afterTomorrow.setHours(0,0,0,0);
         this.afterTomorrow.setDate(this.afterTomorrow.getDate() + 2);
+    }
+
+    private getSessionsByMovieId(movieId: number) {
+        this.sessionService.getSessionsByMovieId(movieId).subscribe(sessions => this.sessions = sessions);
+    }
+
+    ngOnInit() {
+        this.getSessionsByMovieId(this.movieId);
     }
 }

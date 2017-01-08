@@ -7,7 +7,6 @@ export class Movie{
     name: string;
     description: string;
     starting: Date;
-    sessions: Session[];
     genre: string;
     duration: number;
 }

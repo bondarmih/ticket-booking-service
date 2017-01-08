@@ -1,6 +1,13 @@
 package com.bondarmih.ticketbooking.data.entity;
 
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
+import org.joda.time.DateTime;
+
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.util.Date;
 import java.util.Set;
 
 /**
@@ -19,6 +26,15 @@ public class Movie {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "starting")
+    private Date starting;
+
+    @Column(name = "genre")
+    private String genre;
+
     @Column(name = "duration")
     private int duration;
 
@@ -26,6 +42,7 @@ public class Movie {
     private int price;
 
     @OneToMany(mappedBy = "movie")
+    @Cascade(CascadeType.SAVE_UPDATE)
     private Set<MovieSession> movieSessions;
 
     public long getId() {
@@ -66,5 +83,29 @@ public class Movie {
 
     public void setMovieSessions(Set<MovieSession> movieSessions) {
         this.movieSessions = movieSessions;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Date getStarting() {
+        return starting;
+    }
+
+    public void setStarting(Date starting) {
+        this.starting = starting;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 }

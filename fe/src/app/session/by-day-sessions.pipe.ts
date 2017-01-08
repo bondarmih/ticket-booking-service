@@ -3,7 +3,7 @@
  */
 
 import {Pipe, PipeTransform} from "@angular/core";
-import {Session} from "../session/session";
+import {Session} from "./session";
 @Pipe({
     name: 'byDay'
 })

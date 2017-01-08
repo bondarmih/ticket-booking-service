@@ -43,7 +43,7 @@ public class UserController {
     @RequestMapping(value = "/{userId}")
     public @ResponseBody
     UserDTO getUser(@PathVariable long id) {
-        return userService.fingUserById(id);
+        return userService.getUserById(id);
     }
 
 }

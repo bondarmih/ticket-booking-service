@@ -15,6 +15,6 @@ public interface IUserDAO {
     void addUser(User user);
     void updateUser(User user);
     void deleteUser(long id);
-    public void truncateUsers();
+    void truncateUsers();
 
 }

@@ -1,6 +1,12 @@
 package com.bondarmih.ticketbooking.data.entity;
 
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
+import org.joda.time.DateTime;
+
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Date;
 import java.util.Set;
 
@@ -17,7 +23,8 @@ public class MovieSession {
     @Column(name = "id")
     private long id;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = Movie.class)
+    @Cascade(value = CascadeType.PERSIST)
     private Movie movie;
 
     @Column(name = "date")
@@ -26,8 +33,8 @@ public class MovieSession {
     @ManyToOne
     private Hall hall;
 
-    @OneToMany(mappedBy = "movieSession")
-    private Set<Ticket> tickets;
+    @OneToMany(mappedBy = "movieSession", fetch = FetchType.EAGER)
+    private Set<Order> orders;
 
     public long getId() {
         return id;
@@ -61,11 +68,11 @@ public class MovieSession {
         this.hall = hall;
     }
 
-    public Set<Ticket> getTickets() {
-        return tickets;
+    public Set<Order> getOrders() {
+        return orders;
     }
 
-    public void setTickets(Set<Ticket> tickets) {
-        this.tickets = tickets;
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
     }
 }

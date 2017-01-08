@@ -1,6 +1,19 @@
 .main-container {
+  padding: 0;
+  margin 0;
 }
 
 .navbar-static-top {
     background-color: #a6cbd5;
+}
+
+.head-unit {
+  height: 10em;
+  line-height: 10em;
+  background-color: #a6cbd5;
+  text-align: left;
+  font-size-adjust: auto;
+  padding-left: 10px;
+  color: white;
+
 }

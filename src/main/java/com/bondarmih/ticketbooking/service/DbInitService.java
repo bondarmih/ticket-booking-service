@@ -1,9 +1,8 @@
 package com.bondarmih.ticketbooking.service;
 
-import com.bondarmih.ticketbooking.data.dao.IUserDAO;
-import com.bondarmih.ticketbooking.data.dao.IUserRoleDAO;
-import com.bondarmih.ticketbooking.data.entity.User;
-import com.bondarmih.ticketbooking.data.entity.UserRole;
+import com.bondarmih.ticketbooking.data.dao.*;
+import com.bondarmih.ticketbooking.data.entity.*;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -11,10 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by bondarm on 25.12.16.
@@ -31,13 +27,45 @@ public class DbInitService {
     private IUserRoleDAO userRoleDAO;
 
     @Autowired
+    private IHallDAO hallDAO;
+
+    @Autowired
+    private IMovieDAO movieDAO;
+
+    @Autowired
+    private ISessionDAO sessionDAO;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @PostConstruct
     public void dbInit() {
+        truncateAll();
+        addUsers();
+        addHalls();
+        addMovies();
+    }
 
-        userDAO.truncateUsers();
-        userRoleDAO.truncateUserRoles();
+    private void truncateAll() {
+//        movieDAO.truncateMovies();
+//        sessionDAO.truncateSessions();
+//        userDAO.truncateUsers();
+//        userRoleDAO.truncateUserRoles();
+//        hallDAO.truncateHalls();
+    }
+
+    private void addHalls() {
+        for (int i = 1; i <= 4; i++) {
+            Hall hall = new Hall();
+            hall.setName("Зал №"+ i);
+            hall.setRegularSeats(80 + (int)(Math.random()* 15));
+            hall.setVipSeats(20 + (int)(Math.random() * 5));
+            hallDAO.addHall(hall);
+        }
+    }
+
+    private void addUsers() {
+
         UserRole roleUser = new UserRole();
         roleUser.setName("ROLE_USER");
         userRoleDAO.addUserRole(roleUser);
@@ -50,6 +78,7 @@ public class DbInitService {
         userAdmin.setName("admin");
         String hash = passwordEncoder.encode("adminpass");
         userAdmin.setPassword(hash);
+        userAdmin.setDateOfBirth(DateTime.parse("1986-05-06").toDate());
         Set<UserRole> roles = new HashSet<>();
         roles.add(roleAdmin);
         roles.add(roleUser);
@@ -57,7 +86,38 @@ public class DbInitService {
         if (userDAO.getUserByName("admin") == null) {
             userDAO.addUser(userAdmin);
             System.out.println("admin added");
-
         }
+    }
+
+    private void addMovies() {
+        Movie movie = new Movie();
+        movie.setName("Shawshank redemption");
+        movie.setGenre("genre");
+        movie.setDescription("Two imprisoned men bond over a number of years, " +
+                "finding solace and eventual redemption through acts of common decency.");
+        movie.setDuration(142);
+        movie.setPrice(300);
+        movie.setStarting(DateTime.now().withYear(1994).toDate());
+
+        List<Hall> allHalls = hallDAO.getAllHalls();
+
+        HashSet<MovieSession> sessions = new HashSet<>();
+        for (int i = 0; i < 10; i++) {
+            MovieSession session = new MovieSession();
+            session.setDate(DateTime.now()
+                    .withMinuteOfHour(0)
+                    .withSecondOfMinute(0)
+                    .plusHours(1 + i * 4).toDate()
+            );
+            session.setHall(allHalls.get((int)(Math.random() * 4)));
+            session.setMovie(movie);
+            sessions.add(session);
+        }
+        movie.setMovieSessions(sessions);
+        movieDAO.addMovie(movie);
+
+
+
+
     }
 }

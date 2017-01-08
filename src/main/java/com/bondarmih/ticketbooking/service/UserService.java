@@ -4,6 +4,7 @@ import com.bondarmih.ticketbooking.data.dao.IUserDAO;
 import com.bondarmih.ticketbooking.data.dao.UserDAO;
 import com.bondarmih.ticketbooking.data.entity.User;
 import com.bondarmih.ticketbooking.service.dto.UserDTO;
+import com.bondarmih.ticketbooking.service.dto.builder.UserDtoBulder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,17 +22,17 @@ public class UserService {
     IUserDAO userDAO;
 
     public UserDTO findUserByName(String name) {
-        return UserDTO.fromUser(userDAO.getUserByName(name));
+        return UserDtoBulder.fromUser(userDAO.getUserByName(name));
     }
 
     public List<UserDTO> getAllUsers() {
         return userDAO.getAllUsers()
                 .stream()
-                .map(UserDTO::fromUser)
+                .map(UserDtoBulder::fromUser)
                 .collect(Collectors.toList());
     }
 
     public UserDTO getUserById(long id) {
-        return UserDTO.fromUser(userDAO.getUserById(id));
+        return UserDtoBulder.fromUser(userDAO.getUserById(id));
     }
 }

@@ -1,5 +1,8 @@
 package com.bondarmih.ticketbooking.data.entity;
 
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;

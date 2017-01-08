@@ -1,0 +1,11 @@
+
+
+<ul class="nav navbar-nav navbar-right">
+    <li>
+        <a *ngIf="isLoggedIn">Welcome, {{user.name}}</a>
+    </li>
+    <li>
+        <a *ngIf="!isLoggedIn" routerLink="/login" class="">Log in</a>
+    </li>
+
+</ul>

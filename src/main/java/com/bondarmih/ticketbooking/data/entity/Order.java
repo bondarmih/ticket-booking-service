@@ -1,5 +1,8 @@
 package com.bondarmih.ticketbooking.data.entity;
 
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
@@ -23,8 +26,14 @@ public class Order {
     @Column(name = "date")
     private Date date;
 
-    @OneToMany(mappedBy = "order")
-    private Set<Ticket> tickets;
+    @ManyToOne
+    private MovieSession movieSession;
+
+    @Column(name = "regSeats")
+    private int regSeats;
+
+    @Column(name = "vipSeats")
+    private int vipSeats;
 
     public long getId() {
         return id;
@@ -42,12 +51,20 @@ public class Order {
         this.user = user;
     }
 
-    public Set<Ticket> getTickets() {
-        return tickets;
+    public int getRegSeats() {
+        return regSeats;
     }
 
-    public void setTickets(Set<Ticket> tickets) {
-        this.tickets = tickets;
+    public void setRegSeats(int regSeats) {
+        this.regSeats = regSeats;
+    }
+
+    public int getVipSeats() {
+        return vipSeats;
+    }
+
+    public void setVipSeats(int vipSeats) {
+        this.vipSeats = vipSeats;
     }
 
     public Date getDate() {
@@ -56,5 +73,13 @@ public class Order {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public MovieSession getMovieSession() {
+        return movieSession;
+    }
+
+    public void setMovieSession(MovieSession movieSession) {
+        this.movieSession = movieSession;
     }
 }

@@ -3,29 +3,22 @@ package com.bondarmih.ticketbooking.service.dto;
 import com.bondarmih.ticketbooking.data.entity.User;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by bondarm on 26.12.16.
  */
 public class UserDTO implements Serializable {
 
-    private int id;
+    private long id;
     private String name;
-    private String password;
+    private Date dateOfBirth;
 
-    public static UserDTO fromUser(User user) {
-        UserDTO userDTO = new UserDTO();
-        userDTO.setId(user.getId());
-        userDTO.setName(user.getName());
-        userDTO.setPassword(user.getPassword());
-        return userDTO;
-    }
-
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -37,11 +30,11 @@ public class UserDTO implements Serializable {
         this.name = name;
     }
 
-    public String getPassword() {
-        return password;
+    public Date getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 }

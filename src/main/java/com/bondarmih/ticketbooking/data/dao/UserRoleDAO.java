@@ -15,15 +15,9 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class UserRoleDAO implements IUserRoleDAO {
+public class UserRoleDAO extends AbstractHibernateDAO implements IUserRoleDAO {
 
-    @Autowired
-    SessionFactory sessionFactory;
-
-    protected Session getSession() {
-        return sessionFactory.getCurrentSession();
-    }
-
+    @Override
     @SuppressWarnings("unchecked")
     public List<UserRole> getAllUserRoles() {
         Session session = getSession();
