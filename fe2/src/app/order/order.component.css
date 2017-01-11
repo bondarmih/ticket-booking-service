@@ -1,0 +1,7 @@
+.text-old-price {
+  text-decoration: line-through;
+}
+
+form > input {
+  width: 8rem;
+}
