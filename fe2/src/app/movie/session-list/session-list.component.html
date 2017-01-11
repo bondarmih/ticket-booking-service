@@ -1,0 +1,25 @@
+<h6>Сеансы</h6>
+<p *ngIf="(sessions | byDay: today).length > 0">Сегодня</p>
+<div class="list-group">
+  <a *ngFor="let session of sessions | byDay: today | orderByDate"
+     [routerLink]="['/orders/withSession', session.id]"
+     class="list-group-item list-group-item-action">
+    <session-details [session]="session"></session-details>
+  </a>
+</div>
+<p *ngIf="(sessions | byDay: tomorrow).length > 0">Завтра</p>
+<div class="list-group">
+  <a *ngFor="let session of sessions | byDay: tomorrow | orderByDate"
+     [routerLink]="['/orders/withSession', session.id]"
+     class="list-group-item list-group-item-action">
+    <session-details [session]="session"></session-details>
+  </a>
+</div>
+<p *ngIf="(sessions | afterDay: afterTomorrow).length > 0">Потом</p>
+<div class="list-group">
+  <a *ngFor="let session of sessions | afterDay: afterTomorrow | orderByDate"
+     [routerLink]="['/orders/withSession', session.id]"
+     class="list-group-item list-group-item-action">
+    <session-details [session]="session" [withDate]="true"></session-details>
+  </a>
+</div>

@@ -14,6 +14,6 @@ public interface IOrderDAO {
     List<Order> getOrdersBySessionId(long sessionId);
     int getBookedRegSeatsCount(long sessionId);
     int getBookedVipSeatsCount(long sessionId);
-    void addOrder(Order order);
+    long addOrder(Order order);
     void truncateOrders();
 }

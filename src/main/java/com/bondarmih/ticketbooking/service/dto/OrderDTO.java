@@ -12,8 +12,8 @@ public class OrderDTO implements Serializable{
     private Date date;
     private UserDTO user;
     private SessionDTO session;
-    private int regTicketsCount;
-    private int vipTicketsCount;
+    private int ticketsCount;
+    private boolean vip;
     private double price;
     private String[] discounts;
     private boolean confirmed;
@@ -50,20 +50,20 @@ public class OrderDTO implements Serializable{
         this.session = session;
     }
 
-    public int getRegTicketsCount() {
-        return regTicketsCount;
+    public int getTicketsCount() {
+        return ticketsCount;
     }
 
-    public void setRegTicketsCount(int regTicketsCount) {
-        this.regTicketsCount = regTicketsCount;
+    public void setTicketsCount(int ticketsCount) {
+        this.ticketsCount = ticketsCount;
     }
 
-    public int getVipTicketsCount() {
-        return vipTicketsCount;
+    public boolean isVip() {
+        return vip;
     }
 
-    public void setVipTicketsCount(int vipTicketsCount) {
-        this.vipTicketsCount = vipTicketsCount;
+    public void setVip(boolean vip) {
+        this.vip = vip;
     }
 
     public double getPrice() {
@@ -89,4 +89,5 @@ public class OrderDTO implements Serializable{
     public void setConfirmed(boolean confirmed) {
         this.confirmed = confirmed;
     }
+
 }

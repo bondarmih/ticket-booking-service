@@ -21,7 +21,7 @@ public class PriceByTimeOfDayResolver implements IParameterResolver<SessionDTO> 
     public SessionDTO resolve(SessionDTO input) {
         if (check(input)) {
             input.setPriceReg(input.getPriceReg()* EVENING_PRICE_MULTIPLIER);
-            input.setPriceReg(input.getPriceVip()* EVENING_PRICE_MULTIPLIER);
+            input.setPriceVip(input.getPriceVip()* EVENING_PRICE_MULTIPLIER);
         }
         return input;
     }

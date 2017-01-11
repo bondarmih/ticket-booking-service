@@ -33,8 +33,4 @@ public class ServletInitializer extends AbstractAnnotationConfigDispatcherServle
                 new DelegatingFilterProxy("springSecurityFilterChain")};
     }
 
-    @Override
-    protected void customizeRegistration(ServletRegistration.Dynamic registration) {
-        boolean done = registration.setInitParameter("throwExceptionIfNoHandlerFound", "true"); // -> true
-    }
 }

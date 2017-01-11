@@ -49,8 +49,9 @@ public class OrderDAO extends AbstractHibernateDAO implements IOrderDAO {
     }
 
     @Override
-    public void addOrder(Order order) {
-        this.getSession().persist(order);
+    public long addOrder(Order order) {
+        this.getSession().save(order);
+        return order.getId();
     }
 
     @Override

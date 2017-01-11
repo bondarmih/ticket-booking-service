@@ -22,8 +22,11 @@ public class SessionService {
 
     @Autowired SessionParametersResolver sessionParametersResolver;
 
+
+
     public SessionDTO getSessionById(long id) {
-        return SessionDtoBuilder.fromSession(sessionDao.getSessionById(id));
+        return this.processSession(
+                SessionDtoBuilder.fromSession(sessionDao.getSessionById(id)));
     }
 
 
@@ -31,7 +34,12 @@ public class SessionService {
         return sessionDao.getSessionsByMovieId(movieId)
                 .stream()
                 .map(SessionDtoBuilder::fromSession)
-                .map(sessionDTO -> sessionParametersResolver.process(sessionDTO))
+                .map(sessionDTO -> this.processSession(sessionDTO))
                 .collect(Collectors.toList());
     }
+
+    private SessionDTO processSession(SessionDTO session) {
+        return sessionParametersResolver.process(session);
+    }
+
 }

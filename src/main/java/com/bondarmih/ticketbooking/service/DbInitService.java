@@ -41,7 +41,29 @@ public class DbInitService {
     @PostConstruct
     public void dbInit() {
         truncateAll();
-        addUsers();
+
+        UserRole roleUser = new UserRole();
+        roleUser.setName("ROLE_USER");
+        userRoleDAO.addUserRole(roleUser);
+
+        UserRole roleAdmin = new UserRole();
+        roleAdmin.setName("ROLE_ADMIN");
+        userRoleDAO.addUserRole(roleAdmin);
+
+        User userAdmin = new User();
+        userAdmin.setName("admin");
+        String hash = this.passwordEncoder.encode("adminpass");
+        userAdmin.setPassword(hash);
+        userAdmin.setDateOfBirth(DateTime.parse("1986-05-06").toDate());
+        Set<UserRole> roles = new HashSet<>();
+        roles.add(roleAdmin);
+        roles.add(roleUser);
+        userAdmin.setRoles(roles);
+        if (userDAO.getUserByName("admin") == null) {
+            userDAO.addUser(userAdmin);
+            System.out.println("admin added");
+        }
+
         addHalls();
         addMovies();
     }
@@ -66,27 +88,7 @@ public class DbInitService {
 
     private void addUsers() {
 
-        UserRole roleUser = new UserRole();
-        roleUser.setName("ROLE_USER");
-        userRoleDAO.addUserRole(roleUser);
 
-        UserRole roleAdmin = new UserRole();
-        roleAdmin.setName("ROLE_ADMIN");
-        userRoleDAO.addUserRole(roleAdmin);
-
-        User userAdmin = new User();
-        userAdmin.setName("admin");
-        String hash = passwordEncoder.encode("adminpass");
-        userAdmin.setPassword(hash);
-        userAdmin.setDateOfBirth(DateTime.parse("1986-05-06").toDate());
-        Set<UserRole> roles = new HashSet<>();
-        roles.add(roleAdmin);
-        roles.add(roleUser);
-        userAdmin.setRoles(roles);
-        if (userDAO.getUserByName("admin") == null) {
-            userDAO.addUser(userAdmin);
-            System.out.println("admin added");
-        }
     }
 
     private void addMovies() {
@@ -102,7 +104,7 @@ public class DbInitService {
         List<Hall> allHalls = hallDAO.getAllHalls();
 
         HashSet<MovieSession> sessions = new HashSet<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 16; i++) {
             MovieSession session = new MovieSession();
             session.setDate(DateTime.now()
                     .withMinuteOfHour(0)

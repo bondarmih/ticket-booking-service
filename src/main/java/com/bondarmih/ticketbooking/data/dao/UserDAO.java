@@ -28,7 +28,7 @@ public class UserDAO extends AbstractHibernateDAO implements IUserDAO {
     @Override
     public User getUserById(long id) {
         Session session = getSession();
-        User user = (User) session.load(User.class, id);
+        User user = (User) session.get(User.class, id);
         return user;
     }
 

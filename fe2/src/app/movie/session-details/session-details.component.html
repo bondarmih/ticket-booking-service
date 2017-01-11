@@ -1,0 +1,9 @@
+<div *ngIf="session" class="text-nowrap w-100">
+  <strong *ngIf="withDate" class="mx-1">{{ session.timeStart | date:"d MMMM" }}</strong>
+  <strong class="mx-1">{{ session.timeStart | date:"HH:mm" }}</strong>
+  {{session.hall}}
+  <span *ngIf="session.regSeatsAvailable + session.vipSeatsAvailable < 200"
+    class="badge badge-danger ml-0">
+    Осталось {{session.regSeatsAvailable + session.vipSeatsAvailable}} места</span>
+  <b class="">{{session.priceReg}}р/<span class="label">{{session.priceVip}}р</span></b>
+</div>

@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Created by bondarm on 22.12.16.
  */
 @Controller
-@RequestMapping("/")
+@RequestMapping({"/","/movies/**", "/sessions/**", "/orders/**", "/users/**"})
 public class IndexController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String index() {
-        return "redirect:index.html";
+        return "/index.html";
     }
 
 

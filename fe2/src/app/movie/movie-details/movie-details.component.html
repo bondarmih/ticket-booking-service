@@ -1,0 +1,7 @@
+<div *ngIf="movie">
+  <h4>{{movie.name}}</h4>
+  <small class="text-muted">Продолжительность {{movie.duration}} мин.</small>
+  <h6>Описание</h6>
+  <p>{{movie.description}}</p>
+   <session-list [movieId]="movie.id"></session-list>
+</div>

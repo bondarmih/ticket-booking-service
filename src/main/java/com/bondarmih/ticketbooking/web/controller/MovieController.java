@@ -14,7 +14,7 @@ import java.util.List;
  * Created by bondarm on 08.01.17.
  */
 @Controller
-@RequestMapping("/movies")
+@RequestMapping("/api/movies")
 public class MovieController {
 
     @Autowired

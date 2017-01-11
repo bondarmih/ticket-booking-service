@@ -26,7 +26,7 @@ repositories {
 
 war {
     baseName = 'ticket-booking-service'
-    from 'fe/dist'
+    from 'fe2/dist'
 }
 
 cargo {
@@ -81,17 +81,17 @@ dependencies {
 }
 
 task feBuild (type: Exec, group: 'Frontend', description: 'Build frontend bundles'){
-    workingDir 'fe'
-    commandLine 'npm', 'run', 'build'
+    workingDir 'fe2'
+    commandLine 'yarn', 'build'
 }
 
 task feInstall (type: Exec, group: 'Frontend', description: 'Install frontend dependencies'){
-    workingDir 'fe'
+    workingDir 'fe2'
     commandLine 'npm', 'install'
 }
 
 task feCopy (type: Exec, group: 'Frontend', description: 'Copy fe to webapp folder') {
     commandLine 'rm', '-rf', 'src/main/webapp/client'
-    commandLine 'cp', '-Rf', 'fe/dist/client', 'src/main/webapp/'
+    commandLine 'cp', '-Rf', 'fe2/dist/client', 'src/main/webapp/'
 }
 

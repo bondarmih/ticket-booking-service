@@ -15,7 +15,7 @@ import java.util.List;
  */
 
 @Controller
-@RequestMapping("/sessions")
+@RequestMapping("/api/sessions")
 public class SessionController {
 
     @Autowired

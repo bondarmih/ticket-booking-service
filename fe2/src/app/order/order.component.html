@@ -1,0 +1,59 @@
+<div class="container" *ngIf="order">
+
+  <div *ngIf="!submitted">
+    <h4>Новая покупка</h4>
+
+    <h4>{{order.session.movie.name}}</h4>
+    <div>Время начала сеанса: {{order.session.timeStart | date: "d MMMM, HH:mm"}}</div>
+    <label>
+      Цена билета:
+      <span [class.text-old-price]="order.session.priceRegDiscount > 0">{{order.session.priceReg}}</span>
+      <span *ngIf="this.order.session.priceRegDiscount > 0">{{order.session.priceRegDiscount}}</span>,
+      VIP
+      <span [class.text-old-price]="order.session.priceVipDiscount > 0">{{order.session.priceVip}}</span>
+      <span *ngIf="this.order.session.priceVipDiscount > 0">{{order.session.priceVipDiscount}}</span>
+    </label>
+
+    <p class="text-muted">Свободных мест: Обычных - {{order.session.regSeatsAvailable}}/ VIP - {{order.session.vipSeatsAvailable}}</p>
+
+    <form (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="form-group form-inline col-md-4">
+          <label for="ticketsCount">Кол-во билетов</label>
+          <!--<select class="form-control" id="ticketsCount" required-->
+          <!--[(ngModel)]="order.ticketsCount" name="ticketsCount"-->
+          <!--(change) = "countOnChange()" #regTicketCount>-->
+          <!--<option *ngFor="let count of counts" [value]="count" [selected]="1">{{order.ticketsCount}}</option>-->
+          <!--</select>-->
+
+
+          <input required type="number" class="form-control" id="ticketsCount"
+                 placeholder="0" min="0" [max]="ticketsAvailable"
+                 [(ngModel)]="order.ticketsCount" name="ticketsCount"
+                 (change) = "onChange()" #regTicketCount>
+        </div>
+
+        <div class="form-group form-inline col-md-4">
+          <label for="vip">VIP</label>
+          <input type="checkbox" class="form-control" id="vip"
+                 [(ngModel)]="order.vip" name="vip"
+                 (change)="vipChange(vip.checked); onChange()" #vip>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-sm-4">
+          <strong>Итого: {{order.price | currency: "RUR"}}</strong>
+        </div>
+        <div class="col-sm-4">
+          <button type="submit" class="btn" [disabled]="order.ticketsCount <= 0">Купить</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div *ngIf="submitted && order.confirmed">
+    <strong>Ваша покупка №{{order.id}} от {{order.date}} подтверждена</strong>
+  </div>
+  <div *ngIf="submitted && !order.confirmed">ждем...</div>
+</div>
