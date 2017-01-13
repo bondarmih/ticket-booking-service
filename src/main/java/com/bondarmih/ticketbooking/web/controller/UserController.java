@@ -46,4 +46,14 @@ public class UserController {
         return userService.getUserById(id);
     }
 
+
+//    public addUser() {
+//
+//    }
+
+    @RequestMapping(value = "/byName/{userName}")
+    public @ResponseBody UserDTO getUserByName(@PathVariable String userName) {
+        UserDTO user = userService.findUserByName(userName);
+        return user;
+    }
 }

@@ -1,1 +1,1 @@
-*{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.nav>li{position:relative;display:block;float:left}#my-app-title,#my-nav-menu{float:left}@media screen and (min-width: 1200px){#my-nav-menu{position:relative;left:14px}}
+*{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.nav>li{position:relative;display:block;float:left}#my-app-title,#my-nav-menu{float:left}@media screen and (min-width: 1200px){#my-nav-menu{position:relative;left:14px}}nav{padding:1.3em;margin-bottom:3em}

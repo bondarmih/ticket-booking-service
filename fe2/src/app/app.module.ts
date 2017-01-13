@@ -1,9 +1,9 @@
-/** 
+/**
  * This module is the entry for your App when NOT using universal.
- * 
+ *
  * Make sure to use the 3 constant APP_ imports so you don't have to keep
  * track of your root app dependencies here. Only import directly in this file if
- * there is something that is specific to the environment.  
+ * there is something that is specific to the environment.
  */
 
 import { ApplicationRef, NgModule } from '@angular/core';
@@ -21,7 +21,6 @@ import { APP_PROVIDERS } from './app.providers';
 
 import { AppComponent } from './app.component';
 
-import { AppState } from './reducers';
 
 @NgModule({
   declarations: [
@@ -39,33 +38,6 @@ import { AppState } from './reducers';
 })
 
 export class AppModule {
-  constructor(public appRef: ApplicationRef,
-    private _store: Store<AppState>) { }
+  constructor(public appRef: ApplicationRef) { }
 
-  hmrOnInit(store) {
-    if (!store || !store.rootState) return;
-
-    // restore state by dispatch a SET_ROOT_STATE action
-    if (store.rootState) {
-      this._store.dispatch({
-        type: 'SET_ROOT_STATE',
-        payload: store.rootState
-      });
-    }
-
-    if ('restoreInputValues' in store) { store.restoreInputValues(); }
-    this.appRef.tick();
-    Object.keys(store).forEach(prop => delete store[prop]);
-  }
-  hmrOnDestroy(store) {
-    const cmpLocation = this.appRef.components.map(cmp => cmp.location.nativeElement);
-    this._store.take(1).subscribe(s => store.rootState = s);
-    store.disposeOldHosts = createNewHosts(cmpLocation);
-    store.restoreInputValues = createInputTransfer();
-    removeNgStyles();
-  }
-  hmrAfterDestroy(store) {
-    store.disposeOldHosts();
-    delete store.disposeOldHosts;
-  }
 }

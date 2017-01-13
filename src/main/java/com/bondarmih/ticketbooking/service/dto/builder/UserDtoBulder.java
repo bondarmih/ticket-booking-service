@@ -11,6 +11,9 @@ import java.util.Date;
 public class UserDtoBulder {
 
     public static UserDTO fromUser(User user) {
+        if (user == null) {
+            return null;
+        }
         UserDTO userDTO = new UserDTO();
         userDTO.setId(user.getId());
         userDTO.setName(user.getName());

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Created by bondarm on 22.12.16.
  */
 @Controller
-@RequestMapping({"/","/movies/**", "/sessions/**", "/orders/**", "/users/**"})
+@RequestMapping({"/","/movies/**", "/sessions/**", "/orders/**", "/users/**", "/register/**"})
 public class IndexController {
 
     @RequestMapping(method = RequestMethod.GET)

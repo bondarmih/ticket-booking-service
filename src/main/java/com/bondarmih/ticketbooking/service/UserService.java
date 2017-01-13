@@ -22,7 +22,12 @@ public class UserService {
     IUserDAO userDAO;
 
     public UserDTO findUserByName(String name) {
-        return UserDtoBulder.fromUser(userDAO.getUserByName(name));
+        UserDTO user = UserDtoBulder.fromUser(userDAO.getUserByName(name));
+        if (user == null) {
+            user = new UserDTO();
+            user.setName(null);
+        }
+        return user;
     }
 
     public List<UserDTO> getAllUsers() {

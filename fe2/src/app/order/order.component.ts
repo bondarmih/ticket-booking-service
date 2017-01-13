@@ -34,7 +34,6 @@ export class OrderComponent implements OnInit{
 
     let isVip = this.order.vip;
     let s = this.order.session;
-    console.log("vip " + this.order.vip + " count " + this.order.ticketsCount );
     let price =
       (isVip
         ?

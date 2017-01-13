@@ -1,9 +1,13 @@
-<div *ngIf="session" class="text-nowrap w-100">
-  <strong *ngIf="withDate" class="mx-1">{{ session.timeStart | date:"d MMMM" }}</strong>
-  <strong class="mx-1">{{ session.timeStart | date:"HH:mm" }}</strong>
-  {{session.hall}}
-  <span *ngIf="session.regSeatsAvailable + session.vipSeatsAvailable < 200"
-    class="badge badge-danger ml-0">
-    Осталось {{session.regSeatsAvailable + session.vipSeatsAvailable}} места</span>
-  <b class="">{{session.priceReg}}р/<span class="label">{{session.priceVip}}р</span></b>
+<div *ngIf="session" class="text-nowrap w-100 row">
+  <div class="col-md-2">
+    <strong *ngIf="withDate"> {{ session.timeStart | date:"d MMMM" }}</strong>
+  </div>
+  <strong class="col-md-2">{{ session.timeStart | date:"HH:mm" }}</strong>
+  <div class="col-md-2">
+    {{session.hall}}
+  </div>
+  <div *ngIf="session.regSeatsAvailable + session.vipSeatsAvailable < 200"
+    class="col-md-4">
+    Осталось мест: {{session.regSeatsAvailable + session.vipSeatsAvailable}} </div>
+  <b class="col-md-2">{{session.priceReg}}р/<span class="label">{{session.priceVip}}р</span></b>
 </div>

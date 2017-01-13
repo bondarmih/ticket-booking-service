@@ -7,11 +7,11 @@
     <div>Время начала сеанса: {{order.session.timeStart | date: "d MMMM, HH:mm"}}</div>
     <label>
       Цена билета:
-      <span [class.text-old-price]="order.session.priceRegDiscount > 0">{{order.session.priceReg}}</span>
-      <span *ngIf="this.order.session.priceRegDiscount > 0">{{order.session.priceRegDiscount}}</span>,
+      <span [class.text-old-price]="order.session.priceRegDiscount > 0">{{order.session.priceReg}}р</span>
+      <span *ngIf="this.order.session.priceRegDiscount > 0">{{order.session.priceRegDiscount}}р</span>,
       VIP
-      <span [class.text-old-price]="order.session.priceVipDiscount > 0">{{order.session.priceVip}}</span>
-      <span *ngIf="this.order.session.priceVipDiscount > 0">{{order.session.priceVipDiscount}}</span>
+      <span [class.text-old-price]="order.session.priceVipDiscount > 0">{{order.session.priceVip}}р</span>
+      <span *ngIf="this.order.session.priceVipDiscount > 0">{{order.session.priceVipDiscount}}р</span>
     </label>
 
     <p class="text-muted">Свободных мест: Обычных - {{order.session.regSeatsAvailable}}/ VIP - {{order.session.vipSeatsAvailable}}</p>
@@ -47,7 +47,7 @@
           <strong>Итого: {{order.price | currency: "RUR"}}</strong>
         </div>
         <div class="col-sm-4">
-          <button type="submit" class="btn" [disabled]="order.ticketsCount <= 0">Купить</button>
+          <button type="submit" class="btn" [disabled]="order.ticketsCount <= 0 || order.ticketsCount > ticketsAvailable">Купить</button>
         </div>
       </div>
     </form>

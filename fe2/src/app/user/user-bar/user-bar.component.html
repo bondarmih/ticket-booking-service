@@ -1,11 +1,15 @@
-<ul class="navbar-nav pull-md-right">
-  <li class="nav-item">
-    <a class="nav-link" *ngIf="isLoggedIn">Welcome, {{user.name}}</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" *ngIf="!isLoggedIn" routerLink="/login" class="">Log in</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" *ngIf="isLoggedIn" routerLink="/logout" class="">Log out</a>
-  </li>
-</ul>
+
+<div class="navbar-light">
+  <ul class="nav navbar-nav float-sm-right">
+    <li class="nav-item">
+      <a class="nav-link" *ngIf="isLoggedIn">Welcome, {{user.name}}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" *ngIf="!isLoggedIn" routerLink="/login" >Log in</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" *ngIf="isLoggedIn" routerLink="/logout" >Log out</a>
+    </li>
+  </ul>
+</div>
+

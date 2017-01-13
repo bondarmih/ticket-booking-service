@@ -3,7 +3,8 @@
 <div class="list-group">
   <a *ngFor="let session of sessions | byDay: today | orderByDate"
      [routerLink]="['/orders/withSession', session.id]"
-     class="list-group-item list-group-item-action">
+     class="list-group-item list-group-item-action"
+     [class.not-active]="session.regSeatsAvailable + session.vipSeatsAvailable == 0">
     <session-details [session]="session"></session-details>
   </a>
 </div>
@@ -11,7 +12,8 @@
 <div class="list-group">
   <a *ngFor="let session of sessions | byDay: tomorrow | orderByDate"
      [routerLink]="['/orders/withSession', session.id]"
-     class="list-group-item list-group-item-action">
+     class="list-group-item list-group-item-action"
+     [class.not-active]="session.regSeatsAvailable + session.vipSeatsAvailable == 0">
     <session-details [session]="session"></session-details>
   </a>
 </div>
@@ -19,7 +21,8 @@
 <div class="list-group">
   <a *ngFor="let session of sessions | afterDay: afterTomorrow | orderByDate"
      [routerLink]="['/orders/withSession', session.id]"
-     class="list-group-item list-group-item-action">
+     class="list-group-item list-group-item-action"
+     [class.not-active]="session.regSeatsAvailable + session.vipSeatsAvailable == 0">
     <session-details [session]="session" [withDate]="true"></session-details>
   </a>
 </div>
