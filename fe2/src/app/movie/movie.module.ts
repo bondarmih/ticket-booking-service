@@ -15,10 +15,10 @@ import {AfterDaySessions} from "./after-day-sessions.pipe";
 import {ByDaySessions} from "./by-day-sessions.pipe";
 import {OrderBySessions} from "./sort-by-date.pipe";
 import {CommonModule} from "@angular/common";
+import {MovieTagPipe} from "./movie-list/movie-soon.pipe";
 
 let movieRoutes: Routes = [
-  { path: '', component: MovieListComponent, pathMatch: 'full' },
-  { path: 'movies/:id', component: MovieDetailsComponent}
+
 ];
 
 
@@ -30,7 +30,8 @@ let movieRoutes: Routes = [
     SessionDetailsComponent,
     AfterDaySessions,
     ByDaySessions,
-    OrderBySessions
+    OrderBySessions,
+    MovieTagPipe
   ],
   imports: [
     BrowserModule,

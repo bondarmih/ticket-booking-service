@@ -9,5 +9,4 @@ import org.springframework.beans.factory.annotation.Autowired;
  * Created by bondarm on 12.01.17.
  */
 public class UserBuilder {
-
 }

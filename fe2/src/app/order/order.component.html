@@ -19,7 +19,7 @@
     <form (ngSubmit)="onSubmit()">
       <div class="row">
         <div class="form-group form-inline col-md-4">
-          <label for="ticketsCount">Кол-во билетов</label>
+          <label for="ticketsCount">Количество билетов</label>
           <!--<select class="form-control" id="ticketsCount" required-->
           <!--[(ngModel)]="order.ticketsCount" name="ticketsCount"-->
           <!--(change) = "countOnChange()" #regTicketCount>-->
@@ -54,6 +54,28 @@
   </div>
   <div *ngIf="submitted && order.confirmed">
     <strong>Ваша покупка №{{order.id}} от {{order.date}} подтверждена</strong>
+    <div>Фильм: {{order.session.movie.name}}</div>
+    <div>Время сеанса:{{order.session.timeStart}}</div>
+    <div>Количество билетов: {{order.ticketsCount}}</div>
+    <div>Тип мест: <span *ngIf="!order.vip">Обычные</span><span *ngIf="order.vip">VIP</span></div>
+    <div>Цена одного билетa:
+      <span *ngIf="!order.vip">{{order.session.priceReg | currency: "RUR"}}</span>
+      <span *ngIf="order.vip">{{order.session.priceVip | currency: "RUR"}}</span>
+    </div>
+    <div *ngIf="order.session.priceRegDiscount > 0 || order.session.priceVipDiscount > 0">Цена билета с учетом скидок по акциям:
+      <span *ngIf="!order.vip">{{order.session.priceRegDiscount | currency: "RUR"}}</span>
+      <span *ngIf="order.vip">{{order.session.priceVipDiscount | currency: "RUR"}}</span>
+    </div>
+    <div>Акции на цену сеанса:
+      <small *ngFor="let discount of order.session.discounts"> {{discount}}</small>
+    </div>
+    <div>Акции к заказу:
+      <small *ngFor="let discount of order.discounts"> {{discount}}</small>
+    </div>
+    <div>Стоимость заказа с учетом всех скидок: {{order.price | currency: "RUR"}}</div>
+  </div>
+  <div>
+
   </div>
   <div *ngIf="submitted && !order.confirmed">ждем...</div>
 </div>

@@ -4,6 +4,7 @@ import org.joda.time.DateTime;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by bondarm on 04.01.17.
@@ -11,7 +12,7 @@ import java.util.Date;
 public class SessionDTO implements Serializable{
 
     private long id;
-    private String hall;
+    private HallDTO hall;
     private Date timeStart;
     private MovieDTO movie;
     private double priceReg;
@@ -20,6 +21,15 @@ public class SessionDTO implements Serializable{
     private double priceVipDiscount;
     private int regSeatsAvailable;
     private int vipSeatsAvailable;
+    private List<String> discounts;
+
+    public List<String> getDiscounts() {
+        return discounts;
+    }
+
+    public void setDiscounts(List<String> discounts) {
+        this.discounts = discounts;
+    }
 
     public long getId() {
         return id;
@@ -29,11 +39,11 @@ public class SessionDTO implements Serializable{
         this.id = id;
     }
 
-    public String getHall() {
+    public HallDTO getHall() {
         return hall;
     }
 
-    public void setHall(String hall) {
+    public void setHall(HallDTO hall) {
         this.hall = hall;
     }
 

@@ -10,10 +10,7 @@ import {CommonModule} from "@angular/common";
  */
 
 let orderRoutes: Routes = [
-    {
-        path: 'orders/withSession/:sessionId',
-        component: OrderComponent
-    }
+
 ];
 
 @NgModule({

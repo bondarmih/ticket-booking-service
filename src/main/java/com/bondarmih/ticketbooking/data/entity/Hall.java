@@ -1,6 +1,11 @@
 package com.bondarmih.ticketbooking.data.entity;
 
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
+
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Set;
 
 /**
@@ -25,7 +30,14 @@ public class Hall {
     @Column(name = "vip_seats")
     private  int vipSeats;
 
+    @Column(name = "regulag_multiplier")
+    private double regMult;
+
+    @Column(name = "vip_multiplier")
+    private double vipMult;
+
     @OneToMany(mappedBy = "hall")
+    @Cascade(value = CascadeType.DELETE)
     private Set<MovieSession> movieSessions;
 
     public long getId() {
@@ -66,5 +78,21 @@ public class Hall {
 
     public void setMovieSessions(Set<MovieSession> movieSessions) {
         this.movieSessions = movieSessions;
+    }
+
+    public double getRegMult() {
+        return regMult;
+    }
+
+    public void setRegMult(double regMult) {
+        this.regMult = regMult;
+    }
+
+    public double getVipMult() {
+        return vipMult;
+    }
+
+    public void setVipMult(double vipMult) {
+        this.vipMult = vipMult;
     }
 }

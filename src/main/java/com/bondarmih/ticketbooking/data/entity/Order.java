@@ -12,7 +12,7 @@ import java.util.Set;
  */
 
 @Entity
-@Table(name = "order")
+@Table(name = "Order")
 public class Order {
 
     @Id
@@ -34,6 +34,9 @@ public class Order {
 
     @Column(name = "vipSeats")
     private int vipSeats;
+
+    @Column(name = "price")
+    private double price;
 
     public long getId() {
         return id;
@@ -81,5 +84,13 @@ public class Order {
 
     public void setMovieSession(MovieSession movieSession) {
         this.movieSession = movieSession;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }

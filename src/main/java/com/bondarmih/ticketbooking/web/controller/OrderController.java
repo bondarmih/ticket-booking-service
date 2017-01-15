@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * Created by bondarm on 04.01.17.
  */
@@ -25,5 +27,10 @@ public class OrderController {
     @RequestMapping(value = "/", method = RequestMethod.PUT)
     public @ResponseBody OrderDTO addOrder(@RequestBody OrderDTO orderDTO) {
         return orderService.addOrder(orderDTO);
+    }
+
+    @RequestMapping(value = "/byUserId/{userId}")
+    public @ResponseBody List<OrderDTO> getOrdersByUserId(@PathVariable long userId) {
+        return orderService.getOrdersByUserId(userId);
     }
 }

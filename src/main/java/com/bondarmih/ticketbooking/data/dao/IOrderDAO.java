@@ -1,6 +1,7 @@
 package com.bondarmih.ticketbooking.data.dao;
 
 import com.bondarmih.ticketbooking.data.entity.Order;
+import com.bondarmih.ticketbooking.data.entity.User;
 
 import java.util.List;
 
@@ -16,4 +17,6 @@ public interface IOrderDAO {
     int getBookedVipSeatsCount(long sessionId);
     long addOrder(Order order);
     void truncateOrders();
+
+    long getTicketsCountByUser(long userId);
 }

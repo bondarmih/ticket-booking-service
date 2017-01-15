@@ -21,7 +21,11 @@ export class MovieService {
 
     getMovies(): Observable<Movie[]> {
         return this.http.get(this.getMoviesUrl)
-            .map((response: Response) => response.json() as Movie[])
+            .map((response: Response) => {
+              let data = response.json() || [];
+              data.forEach(movie => movie.starting = new Date(movie.starting));
+              return data as Movie[];
+            })
             .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
     }
 

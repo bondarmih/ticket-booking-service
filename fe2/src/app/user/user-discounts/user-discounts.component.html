@@ -1,0 +1,8 @@
+<div *ngIf="discounts">
+  <h5>Доступные акции:</h5>
+  <ul>
+    <li *ngFor="let discount of discounts">{{discount}}</li>
+  </ul>
+
+  <div *ngIf="!isLoggedIn"><a [routerLink]="['/login']">Войдите</a>, чтобы получить больше скидок.</div>
+</div>

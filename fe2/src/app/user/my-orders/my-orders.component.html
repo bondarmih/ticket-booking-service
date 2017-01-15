@@ -1,0 +1,8 @@
+<ul class="list-group" *ngIf="orders">
+  <div *ngIf="orders.length == 0">Пока нет заказов</div>
+  <li class="list-group-item" *ngFor="let order of orders">
+    {{order.date}}, Фильм: {{order.session.movie.name}}, время: {{order.session.timeStart | date: "dd/MMM HH:mm"}}, Билетов:
+    {{order.ticketsCount}} шт, Цена: {{order.price | currency: "RUR"}}
+  </li>
+
+</ul>

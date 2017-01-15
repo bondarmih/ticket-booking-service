@@ -15,7 +15,7 @@ exports.UNIVERSAL_PORT = 8000;
  */
 exports.USE_DEV_SERVER_PROXY = true;
 exports.DEV_SERVER_PROXY_CONFIG = {
-  '**': 'http://localhost:8080'
+  '**': 'http://localhost:8081'
 }
 
 /**
@@ -48,7 +48,8 @@ exports.EXCLUDE_SOURCE_MAPS = [
   // these packages have problems with their sourcemaps
   root('node_modules/@angular'),
   root('node_modules/rxjs'),
-  root('/node_modules/angular-date-value-accessor/')
+  root('node_modules/angular-date-value-accessor/'),
+  root('node_modules/ng2-cookies/')
 ]
 
 exports.MY_COPY_FOLDERS = [

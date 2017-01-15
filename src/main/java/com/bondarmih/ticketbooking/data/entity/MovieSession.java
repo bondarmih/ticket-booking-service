@@ -34,6 +34,7 @@ public class MovieSession {
     private Hall hall;
 
     @OneToMany(mappedBy = "movieSession", fetch = FetchType.EAGER)
+    @Cascade(CascadeType.DELETE)
     private Set<Order> orders;
 
     public long getId() {

@@ -1,8 +1,14 @@
+<div *ngIf="sessions[0]">
+  <h6>Примененные скидки по акциям:</h6>
+  <ul>
+    <li *ngFor="let discount of sessions[0].discounts">{{discount}}</li>
+  </ul>
+</div>
 <h6>Сеансы</h6>
 <p *ngIf="(sessions | byDay: today).length > 0">Сегодня</p>
 <div class="list-group">
   <a *ngFor="let session of sessions | byDay: today | orderByDate"
-     [routerLink]="['/orders/withSession', session.id]"
+     [routerLink]="['../../orders/withSession', session.id]"
      class="list-group-item list-group-item-action"
      [class.not-active]="session.regSeatsAvailable + session.vipSeatsAvailable == 0">
     <session-details [session]="session"></session-details>
@@ -11,7 +17,7 @@
 <p *ngIf="(sessions | byDay: tomorrow).length > 0">Завтра</p>
 <div class="list-group">
   <a *ngFor="let session of sessions | byDay: tomorrow | orderByDate"
-     [routerLink]="['/orders/withSession', session.id]"
+     [routerLink]="['../../orders/withSession', session.id]"
      class="list-group-item list-group-item-action"
      [class.not-active]="session.regSeatsAvailable + session.vipSeatsAvailable == 0">
     <session-details [session]="session"></session-details>
@@ -20,7 +26,7 @@
 <p *ngIf="(sessions | afterDay: afterTomorrow).length > 0">Потом</p>
 <div class="list-group">
   <a *ngFor="let session of sessions | afterDay: afterTomorrow | orderByDate"
-     [routerLink]="['/orders/withSession', session.id]"
+     [routerLink]="['../../orders/withSession', session.id]"
      class="list-group-item list-group-item-action"
      [class.not-active]="session.regSeatsAvailable + session.vipSeatsAvailable == 0">
     <session-details [session]="session" [withDate]="true"></session-details>

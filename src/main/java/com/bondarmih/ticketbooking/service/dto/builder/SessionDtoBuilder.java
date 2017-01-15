@@ -2,9 +2,9 @@ package com.bondarmih.ticketbooking.service.dto.builder;
 
 import com.bondarmih.ticketbooking.data.entity.MovieSession;
 import com.bondarmih.ticketbooking.data.entity.Order;
-import com.bondarmih.ticketbooking.service.MovieService;
 import com.bondarmih.ticketbooking.service.dto.SessionDTO;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -15,7 +15,7 @@ public class SessionDtoBuilder {
     public static SessionDTO fromSession(MovieSession session) {
         SessionDTO sessionDTO = new SessionDTO();
         sessionDTO.setId(session.getId());
-        sessionDTO.setHall(session.getHall().getName());
+        sessionDTO.setHall(HallDtoBuilder.fromHall(session.getHall()));
         sessionDTO.setTimeStart(session.getDate());
         sessionDTO.setMovie(MovieDtoBuilder.fromMovie(session.getMovie()));
         sessionDTO.setPriceReg(session.getMovie().getPrice());
@@ -28,6 +28,8 @@ public class SessionDtoBuilder {
         sessionDTO.setVipSeatsAvailable(session
                 .getHall()
                 .getVipSeats() - getAvailableVipSeats(session.getOrders()));
+        List<String> discounts = new ArrayList<>();
+        sessionDTO.setDiscounts(discounts);
         return sessionDTO;
     }
 

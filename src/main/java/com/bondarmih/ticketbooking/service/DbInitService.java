@@ -1,10 +1,13 @@
 package com.bondarmih.ticketbooking.service;
 
+import com.bondarmih.ticketbooking.data.dao.ISessionDAO;
 import com.bondarmih.ticketbooking.data.dao.*;
 import com.bondarmih.ticketbooking.data.entity.*;
+import com.bondarmih.ticketbooking.data.dao.IMovieDAO;
+import com.bondarmih.ticketbooking.data.dao.IHallDAO;
+import com.bondarmih.ticketbooking.data.dao.IUserRoleDAO;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -82,7 +85,9 @@ public class DbInitService {
             hall.setName("Зал №"+ i);
             hall.setRegularSeats(80 + (int)(Math.random()* 15));
             hall.setVipSeats(20 + (int)(Math.random() * 5));
-            hallDAO.addHall(hall);
+            hall.setRegMult(1 + Math.random() * 0.2);
+            hall.setVipMult(1.2 + Math.random() * 0.3);
+            hallDAO.saveHall(hall);
         }
     }
 

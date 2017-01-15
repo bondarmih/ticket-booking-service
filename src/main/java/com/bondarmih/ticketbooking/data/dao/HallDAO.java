@@ -1,6 +1,7 @@
 package com.bondarmih.ticketbooking.data.dao;
 
 import com.bondarmih.ticketbooking.data.entity.Hall;
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,8 +21,22 @@ public class HallDAO extends AbstractHibernateDAO implements IHallDAO {
     }
 
     @Override
-    public void addHall(Hall hall) {
-        this.getSession().persist(hall);
+    public Hall getHallById(long id) {
+        return (Hall)this.getSession().get(Hall.class, id);
+    }
+
+    @Override
+    public void saveHall(Hall hall) {
+        this.getSession().saveOrUpdate(hall);
+    }
+
+    @Override
+    public void deleteHall(Hall hall) {
+        this.getSession().delete(hall);
+    }
+
+    public void deleteHallById(Hall hall) {
+        this.getSession().delete(hall);
     }
 
     @Override

@@ -1,9 +1,11 @@
 package com.bondarmih.ticketbooking.service;
 
+
+
 import com.bondarmih.ticketbooking.data.dao.ISessionDAO;
 import com.bondarmih.ticketbooking.service.dto.SessionDTO;
 import com.bondarmih.ticketbooking.service.dto.builder.SessionDtoBuilder;
-import com.bondarmih.ticketbooking.service.util.SessionParametersResolver;
+import com.bondarmih.ticketbooking.service.util.SessionParametersModifier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +22,8 @@ public class SessionService {
     @Autowired
     ISessionDAO sessionDao;
 
-    @Autowired SessionParametersResolver sessionParametersResolver;
+    @Autowired
+    SessionParametersModifier sessionParametersModifier;
 
 
 
@@ -34,12 +37,12 @@ public class SessionService {
         return sessionDao.getSessionsByMovieId(movieId)
                 .stream()
                 .map(SessionDtoBuilder::fromSession)
-                .map(sessionDTO -> this.processSession(sessionDTO))
+                .map(this::processSession)
                 .collect(Collectors.toList());
     }
 
     private SessionDTO processSession(SessionDTO session) {
-        return sessionParametersResolver.process(session);
+        return sessionParametersModifier.process(session);
     }
 
 }

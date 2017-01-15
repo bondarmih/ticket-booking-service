@@ -4,10 +4,15 @@
   </div>
   <strong class="col-md-2">{{ session.timeStart | date:"HH:mm" }}</strong>
   <div class="col-md-2">
-    {{session.hall}}
+    {{session.hall.name}}
   </div>
   <div *ngIf="session.regSeatsAvailable + session.vipSeatsAvailable < 200"
-    class="col-md-4">
+    class="col-md-3">
     Осталось мест: {{session.regSeatsAvailable + session.vipSeatsAvailable}} </div>
-  <b class="col-md-2">{{session.priceReg}}р/<span class="label">{{session.priceVip}}р</span></b>
+  <b class="col-md-3">
+    <span [class.text-old-price]="session.priceRegDiscount > 0">{{session.priceReg}}р</span>
+    <span *ngIf="session.priceRegDiscount > 0">{{session.priceRegDiscount}}р</span>/
+    <span [class.text-old-price]="session.priceVipDiscount > 0">{{session.priceVip}}р</span>
+    <span *ngIf="session.priceVipDiscount > 0">{{session.priceVipDiscount}}р</span>
+  </b>
 </div>

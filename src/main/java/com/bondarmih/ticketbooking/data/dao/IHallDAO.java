@@ -10,6 +10,8 @@ import java.util.List;
 public interface IHallDAO {
 
     List<Hall> getAllHalls();
-    void addHall(Hall hall);
+    Hall getHallById(long id);
+    void saveHall(Hall hall);
     void truncateHalls();
+    void deleteHall(Hall hall);
 }

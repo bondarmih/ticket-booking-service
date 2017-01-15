@@ -1,6 +1,7 @@
 package com.bondarmih.ticketbooking.data.dao;
 
 import com.bondarmih.ticketbooking.data.entity.Order;
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,29 +24,30 @@ public class OrderDAO extends AbstractHibernateDAO implements IOrderDAO {
     @Override
     @SuppressWarnings("unchecked")
     public List<Order> getOrdersByUserId(long userId) {
-        List<Order> orderList = this.getSession().createQuery("from Order o where o.user.id = ?")
-                .setParameter(0, userId).list();
+        Query query = this.getSession().createQuery("from Order where user.id = :userId");
+        query.setLong("userId", userId);
+        List<Order> orderList = query.list();
         return orderList;
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public List<Order> getOrdersBySessionId(long sessionId) {
-        List<Order> orderList = this.getSession().createQuery("from Order o where o.session.id = ?")
+        List<Order> orderList = this.getSession().createQuery("from Order o where o.movieSession.id = ?")
                 .setParameter(0, sessionId).list();
         return orderList;
     }
 
     @Override
     public int getBookedRegSeatsCount(long sessionId) {
-        return this.getSession().createQuery("select sum(Order.regSeats) from Order where Order.session.id = ?")
-        .setParameter(0, sessionId).getFirstResult();
+        return this.getSession().createQuery("select sum(Order.regSeats) from Order where Order.movieSession.id = :sessionId")
+                .getFirstResult();
     }
 
     @Override
     public int getBookedVipSeatsCount(long sessionId) {
-        return this.getSession().createQuery("select sum(Order.vipSeats) from Order where Order.session.id = ?")
-                .setParameter(0, sessionId).getFirstResult();
+        return this.getSession().createQuery("select sum(Order.vipSeats) from Order where Order.movieSession.id = :sessionId")
+                .getFirstResult();
     }
 
     @Override
@@ -57,5 +59,13 @@ public class OrderDAO extends AbstractHibernateDAO implements IOrderDAO {
     @Override
     public void truncateOrders() {
         this.getSession().createQuery("delete from Order");
+    }
+
+    @Override
+    public long getTicketsCountByUser(long userId) {
+        Query query = this.getSession().createQuery("select sum(regSeats) + sum(vipSeats) from Order where user.id = :userId");
+        query.setLong("userId", userId);
+        Long result = (Long)query.list().get(0);
+        return (result == null ? 0 : result);
     }
 }

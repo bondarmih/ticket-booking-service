@@ -1,18 +1,15 @@
 package com.bondarmih.ticketbooking.web.controller;
 
-import com.bondarmih.ticketbooking.data.entity.User;
 import com.bondarmih.ticketbooking.service.UserService;
+import com.bondarmih.ticketbooking.service.dto.UserCredentialsDTO;
 import com.bondarmih.ticketbooking.service.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.List;
 
 /**
@@ -33,27 +30,36 @@ public class UserController {
         return users;
     }
 
-    @RequestMapping(value = "/getUserName")
+    @RequestMapping(value = "/getCurrentUser")
     public @ResponseBody
     UserDTO whoAmI(Authentication authentication) {
-        UserDTO user = userService.findUserByName(authentication.getName());
-        return user;
+        if ((authentication != null) && !(authentication instanceof AnonymousAuthenticationToken)) {
+            UserDTO user = userService.findUserByName(authentication.getName());
+            return user;
+        }
+        return null;
     }
 
     @RequestMapping(value = "/{userId}")
     public @ResponseBody
-    UserDTO getUser(@PathVariable long id) {
-        return userService.getUserById(id);
+    UserDTO getUser(@PathVariable long userId) {
+        return userService.getUserDTOById(userId);
     }
 
-
-//    public addUser() {
-//
-//    }
+    @RequestMapping(value = "/", method = RequestMethod.PUT)
+    @ResponseStatus(value = HttpStatus.OK)
+    public void addUser(@RequestBody UserCredentialsDTO userCreds) {
+        userService.addUser(userCreds.getName(), userCreds.getPassword(), userCreds.getDateOfBirth());
+    }
 
     @RequestMapping(value = "/byName/{userName}")
     public @ResponseBody UserDTO getUserByName(@PathVariable String userName) {
         UserDTO user = userService.findUserByName(userName);
         return user;
+    }
+
+    @RequestMapping(value = "/discounts")
+    public @ResponseBody List<String> getDiscounts() {
+        return userService.getDiscounts();
     }
 }

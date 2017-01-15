@@ -1,0 +1,52 @@
+<div *ngIf="hall">
+  <h4>Кинозал</h4>
+  <form [formGroup]="hallForm" (ngSubmit)="onSubmit()" class="form-inline" novalidate>
+    <div class="form-group">
+      <label for="id" >id</label>
+      <input type="text" class="form-control" id="id" formControlName="id">
+    </div>
+    <div class="form-group">
+      <label for="name">Название</label>
+      <input type="text" class="form-control" id="name" formControlName="name">
+      <div *ngIf="formErrors.name" class="alert alert-danger">
+        {{ formErrors.name }}
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="regularSeats">Количество обычных мест</label>
+      <input type="text" class="form-control" id="regularSeats" formControlName="regularSeats">
+      <div *ngIf="formErrors.regularSeats" class="alert alert-danger">
+        {{ formErrors.regularSeats }}
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="vipSeats">Количество VIP мест</label>
+      <input type="text" class="form-control" id="vipSeats" formControlName="vipSeats">
+      <div *ngIf="formErrors.vipSeats" class="alert alert-danger">
+        {{ formErrors.vipSeats }}
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="regMult">Коэффициент цены обычного места</label>
+      <input type="text" class="form-control" id="regMult" formControlName="regMult">
+      <div *ngIf="formErrors.regMult" class="alert alert-danger">
+        {{ formErrors.regMult }}
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="vipMult">Коэффициент цены VIP места</label>
+      <input type="text" class="form-control" id="vipMult" formControlName="vipMult">
+      <div *ngIf="formErrors.vipMult" class="alert alert-danger">
+        {{ formErrors.vipMult }}
+      </div>
+    </div>
+    <div class="form-group">
+      <button [disabled]="!hallForm.valid" type="submit" class="btn btn-primary">Сохранить</button>
+      <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+      <small class="alert-success" *ngIf="successMessage">{{successMessage}}</small>
+      <small class="alert-danger" *ngIf="errorMessage">{{errorMessage}}</small>
+    </div>
+  </form>
+  <button (click)="onDelete()" class="btn">Удалить</button>
+  <button (click)="onAdd()" class="btn">Создать</button>
+</div>

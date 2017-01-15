@@ -31,6 +31,23 @@ export class OrderService {
       .catch(this.handleError);
   }
 
+  public getOrdersByUserId(userId: number): Observable<Order[]> {
+    let url = `${this.ordersUrl}byUserId/${userId}`;
+    return this.http.get(url)
+      .map((response: Response)=> {
+        let orders = response.json();
+        orders.forEach(order=> {
+          order.session.timestart = new Date(order.session.timestart);
+          order.session.movie.starting = new Date(order.session.movie.starting);
+          order.user.dateOfBirth = new Date(order.user.dateOfBirth);
+          order.date = new Date(order.date);
+          return order as Order;
+        });
+        return orders as Order[];
+      })
+      .catch(this.handleError);
+  }
+
   private processRequest(response: Response) {
   let data = response.json();
     data.session.timeStart = new Date(data.session.timeStart);
@@ -51,7 +68,6 @@ export class OrderService {
       errMsg = error.message ? error.message : error.toString();
     }
     console.error(errMsg);
-    debugger;
     return Observable.throw(errMsg);
   }
 }

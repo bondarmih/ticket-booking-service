@@ -2,6 +2,7 @@ package com.bondarmih.ticketbooking.service.dto;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by bondarm on 04.01.17.
@@ -15,7 +16,7 @@ public class OrderDTO implements Serializable{
     private int ticketsCount;
     private boolean vip;
     private double price;
-    private String[] discounts;
+    private List<String> discounts;
     private boolean confirmed;
 
     public long getId() {
@@ -74,11 +75,11 @@ public class OrderDTO implements Serializable{
         this.price = price;
     }
 
-    public String[] getDiscounts() {
+    public List<String> getDiscounts() {
         return discounts;
     }
 
-    public void setDiscounts(String[] discounts) {
+    public void setDiscounts(List<String> discounts) {
         this.discounts = discounts;
     }
 

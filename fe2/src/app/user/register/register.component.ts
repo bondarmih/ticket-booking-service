@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit{
 
   user: any = {};
   loading = false;
-  returnUrl: string;
+  returnUrl: string = 'login';
   submitted: boolean = false;
   userForm: FormGroup;
 
@@ -40,8 +40,7 @@ export class RegisterComponent implements OnInit{
         'username': [this.user.name, [
           Validators.required,
           Validators.minLength(4),
-          Validators.maxLength(24),
-          this.nameExistValidate.bind(this)
+          Validators.maxLength(24)
         ]],
         'password': [this.user.password, [
           Validators.required,
@@ -131,17 +130,22 @@ export class RegisterComponent implements OnInit{
 
 
   register(): void {
+    this.submitted = true;
+    this.user = this.userForm.value;
     this.loading = true;
     this.userService.addUser(
-      this.user.userName,
+      this.user.username,
       this.user.password,
       this.user.dateOfBirth)
       .subscribe(
         data => {
-          this.router.navigate([this.returnUrl]);
+
+            this.router.navigate([this.returnUrl]);
+
         },
         error => {
           this.loading = false;
+          console.log(error);
         });
 
   }

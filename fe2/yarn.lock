@@ -242,6 +242,10 @@ amdefine@1.0.0, amdefine@>=0.0.4:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.0.tgz#fd17474700cb5cc9c2b709f0be9d23ce3c198c33"
 
+angular-date-value-accessor@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/angular-date-value-accessor/-/angular-date-value-accessor-0.0.1.tgz#16b0783f70f74bdf0972ac23257e8b0839e53502"
+
 angular-router-loader@~0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/angular-router-loader/-/angular-router-loader-0.5.0.tgz#b81b1480498320d2a9ac7afb24ed7a9e735a5692"
@@ -3423,7 +3427,7 @@ mkdirp@0.5.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0, mkd
   dependencies:
     minimist "0.0.8"
 
-moment@^2.14.1:
+moment@2.17.1:
   version "2.17.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.17.1.tgz#fed9506063f36b10f066c8b59a144d7faebe1d82"
 
@@ -3461,16 +3465,15 @@ nested-error-stacks@^1.0.0:
   dependencies:
     inherits "~2.0.1"
 
-ng2-datepicker@1.4.8:
-  version "1.4.8"
-  resolved "https://registry.yarnpkg.com/ng2-datepicker/-/ng2-datepicker-1.4.8.tgz#f65714513dc87de3d52c55a52297b7e6c395c2e2"
-  dependencies:
-    moment "^2.14.1"
-    ng2-slimscroll "^1.0.1"
-
-ng2-slimscroll@^1.0.1:
+ng2-bootstrap@^1.2.1:
   version "1.2.1"
-  resolved "https://registry.yarnpkg.com/ng2-slimscroll/-/ng2-slimscroll-1.2.1.tgz#a599e2ea7dfa46a4839a78c301e82189361facd1"
+  resolved "https://registry.yarnpkg.com/ng2-bootstrap/-/ng2-bootstrap-1.2.1.tgz#ce4e84a4c24f43e98cca783c97c31f2cc7dc5043"
+  dependencies:
+    moment "2.17.1"
+
+ng2-cookies@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/ng2-cookies/-/ng2-cookies-1.0.4.tgz#d68fd6b6627be262b464768b63bff1ceec33fbba"
 
 ngrx-store-freeze@0.1.5:
   version "0.1.5"

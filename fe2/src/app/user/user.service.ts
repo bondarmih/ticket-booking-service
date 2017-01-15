@@ -2,29 +2,26 @@ import {User} from './user'
 import { Injectable } from '@angular/core';
 import {Http, Headers, Response, URLSearchParams, RequestOptions} from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import 'rxjs/add/operator/map'
-import {Subject} from 'rxjs/Subject'
+import 'rxjs/add/operator/map';
+import {Subject} from 'rxjs/Subject';
+import { Cookie } from 'ng2-cookies/ng2-cookies';
 
-let DEFAULT_USER = {
-  id: 0,
-  name: 'anonymous',
-  dateOfBirth: new Date()
-};
 
 @Injectable()
 export class UserService {
 
-  private userUrl = 'api/users';
-  private loginUrl = '/login';
-  private isLoggedIn: boolean;
-  private isLoggedInSubject: Subject<boolean>;
+  private userUrl = 'api/users/';
+  private loginUrl = 'api/login';
+  private UserSubject: Subject<User>;
+  private user: User;
 
   constructor(private http: Http) {
-    this.isLoggedInSubject = new Subject<boolean>();
+    this.UserSubject = new Subject<User>();
+    localStorage.removeItem('currentUser');
   }
 
-  get loggedInObservable() {
-    return this.isLoggedInSubject.asObservable();
+  get CurrentUserObservable() {
+    return this.UserSubject.asObservable();
   }
 
   public login(username: string, password: string) {
@@ -39,35 +36,36 @@ export class UserService {
         let user: User = JSON.parse(response.headers.get('user'));
         if(user) {
           localStorage.setItem('currentUser', JSON.stringify(user));
-          this.isLoggedIn = true;
-          this.isLoggedInSubject.next(this.isLoggedIn);
+
+          this.UserSubject.next(user);
         }
       });
   }
 
-  public logout() {
-    localStorage.removeItem('currentUser');
-    this.isLoggedIn = false;
-    this.isLoggedInSubject.next(this.isLoggedIn);
+  public logout(): Observable<Response> {
+
+    return this.http.post('logout',{})
+      .map((response: Response) => {
+        this.UserSubject.next(null);
+        localStorage.removeItem('currentUser');
+        Cookie.deleteAll();
+        return response;
+      });
+
   }
 
   public getUser(): Observable<User> {
-    let user: User = JSON.parse(localStorage.getItem('currentUser')) as User;
-    if (user) {
+    let userString = localStorage.getItem('currentUser');
+    if (userString) {
+      let user: User = JSON.parse(userString);
       return Observable.of(user);
     }
-    user = DEFAULT_USER;
-    return Observable.of(user);
-  }
 
-  // getUserById(): Observable<User> {
-  //   return this.http.get(this.userUrl)
-  //     .map((response: Response) => {
-  //       let data = response.json;
-  //       data.dateOfBirth = new Date(data.dateOfBirth);
-  //       return data as User})
-  //     .catch(this.handleError());
-  // }
+    let url = `${this.userUrl}getCurrentUser`;
+    return this.http.get(url)
+      .map(this.processUser)
+      .catch(this.handleError);
+  }
 
   public getUserByName(name: string): Observable<User> {
     let url = `${this.userUrl}/byName/${name}`;
@@ -86,7 +84,16 @@ export class UserService {
     }
   }
 
-  public addUser(name: string, password: string, dateOfBirth: Date): Observable<User> {
+  public getAvailableDiscountsForUser(): Observable<string[]> {
+    let url = `${this.userUrl}discounts`;
+    return this.http.get(url)
+      .map((response: Response) =>
+        response.json() as string[])
+      .catch(this.handleError);
+  }
+
+
+  public addUser(name: string, password: string, dateOfBirth: Date): Observable<number> {
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
     let user = {
@@ -96,9 +103,7 @@ export class UserService {
     };
     return this.http.put(this.userUrl, JSON.stringify(user), options)
       .map((response: Response) => {
-        let data = response.json();
-        data.dateOfBirth = new Date(data.dateOfBirth);
-        return data as User;
+        return response.ok;
       })
       .catch(this.handleError);
   }

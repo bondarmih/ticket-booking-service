@@ -23,20 +23,15 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry
-                .addResourceHandler("*.js", "*.css", "*.map", "*.html")
+                .addResourceHandler("*.*")
                 .addResourceLocations("/client/")
                 .setCachePeriod(3600)
                 .resourceChain(true)
                 .addResolver(new PathResourceResolver());
+        registry
+                .addResourceHandler("/assets/**")
+                .addResourceLocations("/client/assets/");
     }
-
-//    @Bean
-//    public InternalResourceViewResolver jspViewResolver() {
-//        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-//        viewResolver.setPrefix("/WEB-INF/views/");
-//        viewResolver.setSuffix(".jsp");
-//        return viewResolver;
-//    }
 
     @Bean
     public ViewResolver viewResolver() {
