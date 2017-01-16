@@ -25,37 +25,13 @@ public class HallBuilder {
                 .build();
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setRegularSeats(int regularSeats) {
-        this.regularSeats = regularSeats;
-    }
-
-    public void setVipSeats(int vipSeats) {
-        this.vipSeats = vipSeats;
-    }
-
-    public void setRegMult(double regMult) {
-        this.regMult = regMult;
-    }
-
-    public void setVipMult(double vipMult) {
-        this.vipMult = vipMult;
-    }
-
     public HallBuilder withId(long id) {
-        this.setId(id);
+        this.id = id;
         return this;
     }
 
     public HallBuilder withName(String name) {
-        this.setName(name);
+        this.name = name;
         return this;
     }
 

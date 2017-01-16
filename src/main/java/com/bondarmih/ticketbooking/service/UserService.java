@@ -1,7 +1,9 @@
 package com.bondarmih.ticketbooking.service;
 
 import com.bondarmih.ticketbooking.data.dao.IUserDAO;
+import com.bondarmih.ticketbooking.data.dao.IUserRoleDAO;
 import com.bondarmih.ticketbooking.data.entity.User;
+import com.bondarmih.ticketbooking.data.entity.UserRole;
 import com.bondarmih.ticketbooking.service.dto.UserDTO;
 import com.bondarmih.ticketbooking.service.dto.builder.UserDtoBulder;
 import com.bondarmih.ticketbooking.service.util.OrderParameterModifier;
@@ -13,9 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -27,6 +27,9 @@ public class UserService {
 
     @Autowired
     IUserDAO userDAO;
+
+    @Autowired
+    IUserRoleDAO userRoleDAO;
 
     @Autowired
     SessionParametersModifier sessionParametersModifier;
@@ -80,6 +83,12 @@ public class UserService {
         user.setName(name);
         user.setPassword(passwordEncoder.encode(password));
         user.setDateOfBirth(dateOfBirth);
+        UserRole role = userRoleDAO.getUserRoleByName("ROLE_USER");
+        if (role != null) {
+            Set<UserRole> roleSet = new HashSet<>();
+            roleSet.add(role);
+            user.setRoles(roleSet);
+        }
         userDAO.addUser(user);
     }
 }

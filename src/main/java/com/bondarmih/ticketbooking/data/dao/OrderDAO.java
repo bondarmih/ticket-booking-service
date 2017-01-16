@@ -41,12 +41,14 @@ public class OrderDAO extends AbstractHibernateDAO implements IOrderDAO {
     @Override
     public int getBookedRegSeatsCount(long sessionId) {
         return this.getSession().createQuery("select sum(Order.regSeats) from Order where Order.movieSession.id = :sessionId")
+                .setLong("sessionId", sessionId)
                 .getFirstResult();
     }
 
     @Override
     public int getBookedVipSeatsCount(long sessionId) {
         return this.getSession().createQuery("select sum(Order.vipSeats) from Order where Order.movieSession.id = :sessionId")
+                .setLong("sessionId", sessionId)
                 .getFirstResult();
     }
 

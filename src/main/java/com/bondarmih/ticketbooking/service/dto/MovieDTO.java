@@ -16,6 +16,14 @@ public class MovieDTO implements Serializable{
     private Date starting;
     private String genre;
     private int duration;
+    private int price;
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
 
     public long getId() {
         return id;

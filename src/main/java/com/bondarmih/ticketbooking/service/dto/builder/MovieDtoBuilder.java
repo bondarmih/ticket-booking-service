@@ -16,6 +16,7 @@ public class MovieDtoBuilder {
         movieDTO.setStarting(movie.getStarting());
         movieDTO.setGenre(movie.getGenre());
         movieDTO.setDuration(movie.getDuration());
+        movieDTO.setPrice(movie.getPrice());
 
         return movieDTO;
     }

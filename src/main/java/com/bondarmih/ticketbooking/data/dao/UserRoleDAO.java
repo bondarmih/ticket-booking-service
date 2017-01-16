@@ -31,16 +31,21 @@ public class UserRoleDAO extends AbstractHibernateDAO implements IUserRoleDAO {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public UserRole getUserRoleByName(String name) {
         Session session = getSession();
-        UserRole userRole = (UserRole) session.load(UserRole.class, name);
-        return userRole;
+        List<UserRole> roleList = (List<UserRole>) session.createQuery("from UserRole r where r.name = :name")
+                .setString("name", name).list();
+        if (roleList.size() == 0) {
+            return null;
+        }
+        return roleList.get(0);
     }
 
     @Override
     public void addUserRole(UserRole userRole) {
         Session session = getSession();
-        session.persist(userRole);
+        session.save(userRole);
     }
 
     public void truncateUserRoles() {

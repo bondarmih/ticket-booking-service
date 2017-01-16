@@ -121,7 +121,7 @@ public class DbInitService {
             sessions.add(session);
         }
         movie.setMovieSessions(sessions);
-        movieDAO.addMovie(movie);
+        movieDAO.saveMovie(movie);
 
 
 

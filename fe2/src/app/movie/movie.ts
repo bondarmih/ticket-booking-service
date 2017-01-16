@@ -9,4 +9,5 @@ export class Movie{
     starting: Date;
     genre: string;
     duration: number;
+    price: number;
 }

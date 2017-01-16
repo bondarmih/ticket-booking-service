@@ -11,6 +11,7 @@ public interface IMovieDAO {
 
     List<Movie> getAllMovies();
     Movie getMovieById(long id);
-    void addMovie(Movie movie);
+    void saveMovie(Movie movie);
     void truncateMovies();
+    void deleteMovie(Movie movie);
 }

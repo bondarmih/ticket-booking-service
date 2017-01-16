@@ -4,8 +4,7 @@
 import { Input, Output, Component, OnInit, OnChanges, EventEmitter } from '@angular/core';
 import {Hall} from "../../../movie/hall";
 import {HallService} from "../../service/hall.service";
-import { FormGroup, FormControl, FormBuilder, Validators,
-  ValidatorFn, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 
 @Component({
   moduleId: module.id,
@@ -49,7 +48,7 @@ export class AdminHallDetailsComponent implements OnInit, OnChanges {
       {
         'id':
           [
-            this.hall.id,
+            { value: this.hall.id, disabled: true},
             [
             ]
           ],
@@ -99,7 +98,6 @@ export class AdminHallDetailsComponent implements OnInit, OnChanges {
     if (!this.hallForm) { return; }
     const form = this.hallForm;
     for (const field in this.formErrors) {
-      // clear previous error message (if any)
       this.formErrors[field] = '';
       const control = form.get(field);
       if (control && control.dirty && !control.valid) {

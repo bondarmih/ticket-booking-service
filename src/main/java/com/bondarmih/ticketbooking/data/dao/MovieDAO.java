@@ -31,13 +31,18 @@ public class MovieDAO extends AbstractHibernateDAO implements IMovieDAO {
     }
 
     @Override
-    public void addMovie(Movie movie) {
-        this.getSession().persist(movie);
+    public void saveMovie(Movie movie) {
+        this.getSession().save(movie);
     }
 
     @Override
     public void truncateMovies() {
         Session session = getSession();
         session.createQuery("delete from Movie ").executeUpdate();
+    }
+
+    @Override
+    public void deleteMovie(Movie movie) {
+        this.getSession().delete(movie);
     }
 }

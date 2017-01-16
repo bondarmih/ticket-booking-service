@@ -1,6 +1,6 @@
 import {Movie} from "./movie";
 import {Injectable} from "@angular/core";
-import {Http, Response} from '@angular/http';
+import {Http, Headers, Response, RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/map'
 import {Observable} from 'rxjs/Rx';
 
@@ -35,4 +35,36 @@ export class MovieService {
             .map((response: Response) => response.json() as Movie )
             .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
     }
+
+  public saveMovie(movie: Movie): Observable<string> {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers: headers});
+    return this.http.post(this.getMoviesUrl, movie, options)
+      .map((response: Response) => {
+        return response.status;
+      })
+      .catch(this.handleError);
+  }
+
+  public deleteMovie(id: number): Observable<string> {
+    let url = `${this.getMoviesUrl}${id}`;
+    return this.http.delete(url)
+      .map((response: Response) => {
+        return response.status;
+      })
+      .catch(this.handleError);
+  }
+
+  private handleError(error: Response | any) {
+    let errMsg: string;
+    if (error instanceof Response) {
+      const body = error.json() || '';
+      const err = body.error || JSON.stringify(body);
+      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+    } else {
+      errMsg = error.message ? error.message : error.toString();
+    }
+    console.error(errMsg);
+    return Observable.throw(errMsg);
+  }
 }

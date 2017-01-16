@@ -4,6 +4,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Movie} from "../../../movie/movie";
 import {Hall} from "../../../movie/hall";
+import {MovieService} from "../../../movie/movie.service";
 
 @Component({
   moduleId: module.id,
@@ -13,10 +14,31 @@ import {Hall} from "../../../movie/hall";
 export class AdminMovieListComponent implements OnInit {
 
   movies: Movie[];
-  selected: Hall;
+  selected: Movie;
 
-  constructor() { }
+  constructor(
+    private movieService: MovieService,
+  ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.getMovies();
+  }
+
+  getMovies() {
+    this.movieService.getMovies()
+      .subscribe(movies => this.movies = movies);
+  }
+
+  onSelect(movie: Movie) {
+    this.selected = movie;
+  }
+
+  onDataChanged(event) {
+    if(event) {
+      this.selected = null;
+    }
+    this.getMovies();
+  }
+
 
 }

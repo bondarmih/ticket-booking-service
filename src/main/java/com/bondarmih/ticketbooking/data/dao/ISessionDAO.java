@@ -13,5 +13,7 @@ public interface ISessionDAO {
     MovieSession getSessionById(long id);
     List<MovieSession> getSessionsByMovieId(long id);
     void truncateSessions();
+    void deleteSession(MovieSession session);
+    void saveSession(MovieSession session);
 
 }

@@ -3,10 +3,9 @@ package com.bondarmih.ticketbooking.web.controller;
 import com.bondarmih.ticketbooking.service.MovieService;
 import com.bondarmih.ticketbooking.service.dto.MovieDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,9 +19,8 @@ public class MovieController {
     @Autowired
     MovieService movieService;
 
-    @RequestMapping("/")
-    public
-    @ResponseBody
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public @ResponseBody
     List<MovieDTO> getAllMovies() {
         return movieService.getAllMovies();
     }
@@ -31,5 +29,17 @@ public class MovieController {
     public @ResponseBody
     MovieDTO getMovieById(@PathVariable long id) {
         return movieService.getMovieById(id);
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
+    public void saveMovie(@RequestBody MovieDTO movieDTO) {
+        this.movieService.save(movieDTO);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteMovie(@PathVariable long id) {
+        this.movieService.deleteMovieById(id);
     }
 }
